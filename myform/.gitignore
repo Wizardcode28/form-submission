@@ -1,0 +1,13 @@
+# Ignore server env & dependencies
+server/.env
+server/node_modules/
+
+# Optional: frontend node_modules (if not already ignored in client/.gitignore)
+client/node_modules/
+
+# Optional: ignore builds
+dist/
+build/
+
+# Optional: system files
+.DS_Store
