@@ -67,11 +67,8 @@ function App() {
       <input
           className={errors.name? "input-error" : ""}
           type="text"
-          // name="name"
+          autoComplete='name'
           placeholder="Enter name"
-          // value={form.name}
-          // onChange={handleChange}
-          // required
           {...register("name",{
             required:"Name is required",
             minLength:{value:3,message:"min len atleast 3"},
@@ -82,11 +79,8 @@ function App() {
         <input
           className={errors.email?"input-error":""}
           type="email"
-          // name="email"
+          autoComplete='email'
           placeholder="Enter email"
-          // value={form.email}
-          // onChange={handleChange}
-          // required
           {...register("email",
             {required:"Email is required",
              pattern:{
@@ -112,9 +106,14 @@ function App() {
           }
         })}
         />
+        <input 
+        type="text"
+        placeholder='Enter your Country name'
+        {...register("country")}
+        />
         {errors.Password && <p className='err-msg'>{errors.Password.message}</p>}
-        <select name='field'>
-        <option disabled>Choose your field of interest</option>
+        <select name='field' defaultValue={"default"}>
+        <option disabled value="default" >Choose your field of interest</option>
         <option value="AI/ML Enginner">AI/ML Enginner</option>  
         <option value="Data Scientist">Data Scientist</option>  
         <option value="Web Developer">Web Developer</option>  

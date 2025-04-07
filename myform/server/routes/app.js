@@ -43,6 +43,27 @@ router.post("/submit", async (req, res) => {
       res.status(500).json({ message: "Failed to save data" });
     }
   })
+
+router.get("/admin",async (req,res)=>{
+  const userdata=await FormData.find().sort({createdAt:-1})
+  const total=await FormData.countDocuments()
+
+  const today=new Date()
+  today.setHours(0,0,0,0)//start of today
+  const todaySubmissions=await FormData.find({
+    createdAt:{$gte:today}
+  })
+    //gte-greater than or equal to
+    //fetches submissions from today at 0:00 onwards
+
+  const lastWeek=new Date()  
+  lastWeek.setDate(lastWeek.getDate()-7)
+  const weeklySubmissions=await FormData.find({
+    createdAt:{$gte:lastWeek}
+  })
+  res.json(userdata,total,todaySubmissions,lastWeek)
+})  
+
 router.get("/locations",async (req,res)=>{
   try {
     const all = await FormData.find({}, 'name city latitude longitude');
