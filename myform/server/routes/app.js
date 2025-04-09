@@ -45,23 +45,25 @@ router.post("/submit", async (req, res) => {
   })
 
 router.get("/admin",async (req,res)=>{
+  try{
   const userdata=await FormData.find().sort({createdAt:-1})
   const total=await FormData.countDocuments()
 
   const today=new Date()
   today.setHours(0,0,0,0)//start of today
   const todaySubmissions=await FormData.find({
-    createdAt:{$gte:today}
-  })
+    createdAt:{$gte:today}  })
     //gte-greater than or equal to
     //fetches submissions from today at 0:00 onwards
-
   const lastWeek=new Date()  
   lastWeek.setDate(lastWeek.getDate()-7)
   const weeklySubmissions=await FormData.find({
-    createdAt:{$gte:lastWeek}
-  })
-  res.json(userdata,total,todaySubmissions,lastWeek)
+    createdAt:{$gte:lastWeek}  })
+  res.json({userdata:userdata,total:total,todaySubmissions:todaySubmissions,weeklySubmissions:weeklySubmissions})
+  }
+  catch(err){
+    res.status(500).json({message:"Somwthing went wrong"})
+  }
 })  
 
 router.get("/locations",async (req,res)=>{
