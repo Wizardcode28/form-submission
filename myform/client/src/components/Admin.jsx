@@ -9,7 +9,7 @@ import LocationMap from './LocationMap';
 const Admin = () => {
 const [data, setData] = useState({userdata:[],total:0,todaySubmissions:[],weeklySubmissions:[]})
 useEffect(() => {
-    fetch("http://localhost:5000/api/admin")
+    fetch("https://form-backend-4q6y.onrender.com/api/admin")
     .then(response => response.json())
     .then(res=>{
       console.log(res)

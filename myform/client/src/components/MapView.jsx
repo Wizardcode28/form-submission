@@ -16,7 +16,7 @@ function MapView() {
   });
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/locations")
+    fetch("https://form-backend-4q6y.onrender.com/api/locations")
       .then(res => res.json())
       .then(data => setLocations(data))
       .catch(err => console.error("Failed to fetch locations:", err));
