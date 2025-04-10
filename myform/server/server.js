@@ -2,7 +2,7 @@ const express = require("express")
 const cors = require("cors")
 const app = express()
 const rateLimit=require("express-rate-limit")
-app.set('trust proxy', true)//Required for getting correct IP on Render/Vercel
+app.set('trust proxy', 1)//Required for getting correct IP on Render/Vercel
 const PORT = 5000
 const connectDB = require('./db')
 const hii= require('./routes/app.js')
