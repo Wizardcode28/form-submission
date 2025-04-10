@@ -6,6 +6,11 @@ app.set('trust proxy', true)//Required for getting correct IP on Render/Vercel
 const PORT = 5000
 const connectDB = require('./db')
 const hii= require('./routes/app.js')
+const corsOptions = {
+  origin: "https://form-submission-pink.vercel.app",
+  methods: ["POST", "GET"],
+  credentials: true,
+}
 const limiter=rateLimit({
   windowMs:1*60*1000,// 1 minute,
   max:500,//limit each IP to 5requests per min
@@ -19,7 +24,7 @@ const limiter=rateLimit({
 connectDB()
 
 // Middlewares
-app.use(cors())//allows all requests
+app.use(cors(corsOptions))
 app.use(express.json())
 
 // Add Rate Limiting

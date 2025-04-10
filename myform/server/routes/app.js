@@ -7,7 +7,7 @@ const FormData= require('../models/formModel.js')
 router.post("/submit", async (req, res) => {
   // getting ip address
   let ip = req.headers["x-forwarded-for"]?.split(",")[0] || req.socket?.remoteAddress
-  ip="152.58.25.9"
+  // ip="152.58.25.9"
     try {
       const locationRes=await axios.get(`https://ipapi.co/${ip}/json/`)
       const locationData=locationRes.data
@@ -36,11 +36,11 @@ router.post("/submit", async (req, res) => {
       if(!success) return res.status(400).json({message:"ReCAPTCHA FAILED"})
       const newEntry = new FormData({ name, email,...locationInfo});
       await newEntry.save()
-      res.json({ message: " Data saved to MongoDB!" });
+      res.json({ message: "Form submitted successfully!" });
     }
     catch (err){
       console.error("❌ Error during submission:", err.message);
-      res.status(500).json({ message: "Failed to save data" });
+      res.status(500).json({ message: "Error occured" });
     }
   })
 
